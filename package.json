@@ -1,0 +1,19 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "## Collaborators: @bairdko, @jv1056, @aseatts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bairdko/project2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bairdko/project2/issues"
+  },
+  "homepage": "https://github.com/bairdko/project2#readme"
+}
