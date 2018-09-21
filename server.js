@@ -18,7 +18,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //set up handlebars
-app.engine("handlebars",exphbs({defaultLayout: "main"}));
+app.engine("handlebars",exphbs({
+ defaultLayout: "main",
+//  helpers: {
+//    skipFirst: function(detail_types){
+//       if (detail_types.id === 1){
+//         continue;
+//       }
+//     }
+//   }
+}));
 app.set("view engine", "handlebars");
 
 var formRoute = require("./controllers/formController.js");

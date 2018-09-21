@@ -1,5 +1,5 @@
 //import the orm
-var orm = require("../config/orm.js")
+var orm = require("../config/orm.js");
 
 var user = {
   all: function(cb){

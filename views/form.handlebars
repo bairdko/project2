@@ -8,24 +8,148 @@
       <h3>Add a Persona</h3>
     <!--end header row-->
     </div>
+{{!-- 
+    {{#each profile_types}}
+      <p>{{id}},{{profile_type}}</p>
+    {{/each}}
 
-     {{#each users}}
-          <p>{{first_name}} {{last_name}}</p>
-      {{/each}}
+    {{#each users}}
+      <p>{{first_name}} {{last_name}}</p>
+    {{/each}} --}}
 
-    {{!-- <form>
+    <form>
       <div class = "form-row">
 
-       
+        <div class = "form-group col-md-4">
 
-        <div class = "form-group col-md-6">
-          <label for = "profile_type">
-            
-            
-          </label>
+          {{!-- This is the input to get the profile id --}}
+          <label for = "profile_type">Profile Type</label>
+          
+          <select id="profile_type" class="form-control">
+            <option selected>Choose an option (required)</option>
+            {{#each profile_types}}
+              <option value = "{{id}}">{{profile_type}}</option>
+             {{/each}}
+          </select>
+
+          
+         
+        </div>
+
+        {{!-- This is the input to get the profile nickname--}}
+
+        <div class="form-group col-md-4">
+          <label for = "profile_name">Profile Type</label>
+          <input type="text" class="form-control" id = "profile_name" placeholder="Enter a Persona name (required)">
+        </div>
+
+        {{!-- This is the input to get the profile nickname--}}
+
+        <div class="form-group col-md-4">
+          <label for = "user_pseudo">Nickname</label>
+          <input type="text" class="form-control" id = "user_pseudo" placeholder="Enter a user nickname">
+        </div>
+
+      {{!-- end row --}}
+      </div>
+
+      <h5>Details</h5>
+
+      <div class = "form-row">
+        <div class = "form-group col-md-4">
+          <label for = "text_input">Tell us about your Persona</label>
+          <input type = "text" class = "form-control text_input" id = "text_short" placeholder = "Short description">
+        </div>
+      {{!-- end row --}}
+      </div>
+      <div class = "form-row">
+        <div class = "form-group col-md-8 align-center">
+          <textarea class="form-control text_input" id="text_long" rows="4" placeholder = "What do you want us to know about your Persona?"></textarea>
+        </div>
+      {{!--end row--}}
+      </div>
+
+
+
+      <h5>Links</h5>
+
+      {{!-- link 1 --}}
+      <div class = "form-row">
+
+        <div class = "form-group col-md-2">
+          
+          <select id="detail_type1" class="form-control">
+            <option selected>Choose an option</option>
+            {{#each detail_types}}
+              {{#unless @first}}
+              <option value = "{{id}}">{{ detail_type}}</option>
+              {{/unless}}
+             {{/each}}
+          </select>
+         
+        </div>
+
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link1" id = "link1_desc" placeholder = "Link description">
+        </div>
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link1" id = "link1_url" placeholder = "Enter URL">
         </div>
       </div>
-    </form>   --}}
+
+      {{!-- link 2--}}
+
+      <div class = "form-row">
+
+        <div class = "form-group col-md-2">
+          
+          <select id="detail_type2" class="form-control">
+            <option selected>Choose an option</option>
+            {{#each detail_types}}
+              {{#unless @first}}
+              <option value = "{{id}}">{{detail_type}}</option>
+              {{/unless}}
+             {{/each}}
+          </select>
+         
+        </div>
+
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link2" id = "link2_desc" placeholder = "Link description">
+        </div>
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link2" id = "link2_url" placeholder = "Enter URL">
+        </div>
+      </div>
+
+      {{!-- link 3--}}
+
+      <div class = "form-row">
+
+        <div class = "form-group col-md-2">
+          
+          <select id="detail_type3" class="form-control">
+            <option selected>Choose an option</option>
+            {{#each detail_types}}
+              {{#unless @first}}
+              <option value = "{{id}}">{{detail_type}}</option>
+              {{/unless}}
+             {{/each}}
+          </select>
+         
+        </div>
+
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link3" id = "link1_desc" placeholder = "Link description">
+        </div>
+        <div class = "form-group col-md-5">
+          <input type = "text" class = "form-control link3" id = "link1_url" placeholder = "Enter URL">
+        </div>
+      </div>
+
+
+    <button type="submit" class="btn btn-primary">Add!</button>
+    </form>  
 
   <!--end container-->
   </div>
