@@ -1,12 +1,19 @@
-
-<!-- <div class="container"> -->
+{{>header}}
+ <div class="container">
 
 <h1>{{title}}</h1>
 
+{{#if errors}}
+  {{#each errors}}
+    <div class="alert alert-danger">
+        {{this.msg}}
+    </div>
+  {{/each}}
+{{/if}}
 
 
 
-  <!-- <form class="" action="/register" method="post">
+ <form class="" action="/register" method="post">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" name="username" class="form-control" placeholder="Username">
@@ -26,4 +33,4 @@
 
      <button type="submit" class="btn btn-primary">Submit</button
   </form>
-</div> -->
+</div>

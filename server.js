@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-
+var expressValidator = require('express-validator');
 var PORT = process.env.PORT || 8080;
 
 var app = express();
@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+//validation package
+app.use(expressValidator());
+
 // Set Handlebars.
 var exphbs = require("express-handlebars");
 
@@ -21,9 +24,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
-var routes = require("./models/users.js");
+var routes = require("./controllers/login.js");
 
-app.use(routes);
+ app.use(routes);
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
