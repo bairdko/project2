@@ -13,6 +13,15 @@ var profile = {
     orm.create("profile",cols,vals,function(res){
       cb(res);
     });
+  },
+  readWhere: function(id1,id2,cb){
+    var where = [
+      ["user_id",id1],
+      ["id",id2]
+    ];
+    orm.readWhere("profile",where,function(res){
+      cb(res);
+    });
   }
 };
 

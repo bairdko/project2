@@ -34,7 +34,6 @@ function renderFormPage(req, res) {
 
   var hbsObject = {
     profile_types: req.profile_type,
-    users: req.user,
     detail_types: req.detail_type
   }
 

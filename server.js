@@ -24,8 +24,10 @@ app.engine("handlebars",exphbs({
 app.set("view engine", "handlebars");
 
 var formRoute = require("./controllers/formController.js");
+var qrDisplayRoute = require("./controllers/qrDisplayController.js");
 
 app.use(formRoute);
+app.use(qrDisplayRoute);
 
 app.listen(PORT,function(){
   console.log("App listening at localhost:" + PORT);

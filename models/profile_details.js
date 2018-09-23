@@ -13,6 +13,13 @@ var profile_details = {
     orm.create("profile_details",cols,vals,function(res){
       cb(res);
     });
+  },
+  readJoinWhere: function(id,cb){
+    var where =[["profile_id",id]];
+    orm.readJoinWhere("profile_details","detail_type",["detail_type","detail_icon"],["detail_type_id","id"],
+    where,function(res){
+      cb(res);
+    });
   }
 };
 

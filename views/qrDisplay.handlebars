@@ -1,0 +1,42 @@
+
+<div class = "container">
+
+    <div class = "row">
+      <br />
+      <br />
+    <!--filler row-->
+    </div>
+
+  <!--Name and custom links-->
+  <div class = "row justify-content-center">
+    <h2>{{profile.0.user_pseudo}}</h2>
+  </div>
+
+  <div class = "row">
+      <br />
+    <!--filler row-->
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-2"></div>
+    <div class = "col-md-4">
+      <div class = "row justify-content-center"><a href="">link1</a></div>
+      <div class = "row justify-content-center"><a href="">link2</a></div>
+    </div>
+    <div class = "col-md-4 text-center">
+      <p>{{profile_details.0.description}}</p>
+    </div>
+    <div class = "col-md-2"></div>
+  </div>
+
+  <div class = "row">
+      <br />
+    <!--filler row-->
+  </div>
+
+  <div class = "row justify-content-center">
+      <a href = "{{profile_details.1.url}}"><img class = "socialIcons" src = "{{profile_details.1.detail_icon}}"</a>
+      <a href = "{{profile_details.2.url}}"><img class = "socialIcons" src = "{{profile_details.2.detail_icon}}"</a>
+      <a href = "{{profile_details.3.url}}"><img class = "socialIcons" src = "{{profile_details.3.detail_icon}}"</a>
+  </div>
+</div>
