@@ -6,32 +6,18 @@ var express = require("express");
 var user = require("../models/users.js");
 var profile_type = require("../models/profile_type.js");
 var detail_type = require("../models/detail_type.js");
+var profile = require("../models/profile.js");
+var profile_details = require("../models/profile_details.js");
 
 //set up express router
 var router = express.Router();
 
-//get user data
-
-
-/* possibly instead of a model per table, a model per page.
-so wouldn't use user.all and profile_type.all, but instead form.all */
-
-/*might not need rows? -- no i do need, that's data funciton*/
+//get all datat to read in, chain together using the next function
 
 function getProfileType(req, res, next) {
   profile_type.all(function(data) {
   
     req.profile_type = data;
-    next();
-  });
-}
-
-/*need to switch this out with get detail_type, but this will work for now*/
-
-function getUser(req, res, next) {
-  user.all(function(data) {
-
-    req.user = data;
     next();
   });
 }
@@ -52,10 +38,77 @@ function renderFormPage(req, res) {
     detail_types: req.detail_type
   }
 
-  console.log(hbsObject);
   res.render('form', hbsObject);
 }
 
-router.get('/add', getProfileType, getUser, getDetailType, renderFormPage);
+//read data from the sql tables
+
+router.get('/add', getProfileType, getDetailType, renderFormPage);
+
+//post back to sql tables
+
+function postProfileArr(req,res,next){
+  var profileArr = [
+    req.body.user_id,
+    req.body.profile_type_id,
+    req.body.profile_name,
+    req.body.user_pseudo
+  ];
+
+  profile.create(["user_id","profile_type_id","profile_name","user_pseudo"],
+  profileArr, function(response){
+    console.log("record inserted at " + response.insertId);
+    res.json();
+    next();
+  })
+}
+
+function postDetailArr(req,res){
+
+  var detailArr = [
+    //text arr
+    [ 1,
+      1,
+      req.body.text,
+      null
+    ],
+    //link1 arr
+    [ 1,
+      req.body.detail_type_id1,
+      req.body.desc1,
+      req.body.url1
+
+    ],
+    //link2 arr
+    [ 1,
+      req.body.detail_type_id2,
+      req.body.desc2,
+      req.body.url2
+    ],
+    //link3 arr
+    [ 1,
+      req.body.detail_type_id3,
+      req.body.desc3,
+      req.body.url3
+    ]
+
+  ]
+
+  for(var i = 0; i < detailArr.length; i ++){
+    profile_details.create(["profile_id","detail_type_id","description","url"],
+    detailArr[i], function(response){
+      console.log("record inserted at " + response.insertId);
+      res.json();
+    });
+  }
+
+}
+
+//post data to the table
+
+router.post('/api/profile',postProfileArr,postDetailArr);
+
+
+
 
 module.exports = router;

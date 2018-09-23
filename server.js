@@ -19,14 +19,7 @@ app.use(bodyParser.json());
 
 //set up handlebars
 app.engine("handlebars",exphbs({
- defaultLayout: "main",
-//  helpers: {
-//    skipFirst: function(detail_types){
-//       if (detail_types.id === 1){
-//         continue;
-//       }
-//     }
-//   }
+ defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
 

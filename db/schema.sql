@@ -7,10 +7,9 @@ USE persona_db;
 
 CREATE TABLE users (
 		id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-		first_name VARCHAR(255),
-		last_name VARCHAR(255),
+		username VARCHAR(255),
 		email VARCHAR(255) NOT NULL,
-		password VARCHAR(255) NOT NULL
+		password BINARY(60)
     );
 
 /* PROFILES table schema */
@@ -26,13 +25,15 @@ CREATE TABLE profile (
 /*PROFILE TYPE table schema */
 CREATE TABLE profile_type (
 		id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        profile_type VARCHAR(255) NOT NULL
+        profile_type VARCHAR(255) NOT NULL,
+        profile_icon VARCHAR(255)
 	);
     
 /*DETAIL TYPE table schema */
 CREATE TABLE detail_type (
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	detail_type VARCHAR(255) NOT NULL
+	detail_type VARCHAR(255) NOT NULL,
+    detail_icon VARCHAR(255)
     );
     
 /*PROFILE DETAILS*/    
@@ -40,7 +41,10 @@ CREATE TABLE profile_details (
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     profile_id INTEGER NOT NULL,
     detail_type_id INTEGER NOT NULL,
-    short_desc VARCHAR(30),
-    long_desc VARCHAR(255),
-    url VARCHAR(255)
+    description VARCHAR(255),
+    url VARCHAR(255),
+    CONSTRAINT FK_profId 
+        FOREIGN KEY (profile_id) 
+        REFERENCES profile(id)
+        ON DELETE CASCADE
 );

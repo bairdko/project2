@@ -2,6 +2,18 @@
 
 var connection = require("../config/connection.js");
 
+//helper function to make query string
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
+
 //ORM object
 var orm = {
   //read all details of a table
@@ -10,6 +22,24 @@ var orm = {
 
     connection.query(queryString,tableInput,function(err,res){
       if(err) throw err;
+
+      cb(res);
+    });
+
+  },
+
+  create: function(tableInput,cols,vals,cb){
+    var queryString = "INSERT INTO " + tableInput;
+
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
+
+    connection.query(queryString,vals,function(err,res){
+      if (err) throw err;
 
       cb(res);
     });
