@@ -9,8 +9,11 @@ var detail_type = require("../models/detail_type.js");
 var profile = require("../models/profile.js");
 var profile_details = require("../models/profile_details.js");
 
+var QRCode = require("QRCode");
+
 //set up express router
 var router = express.Router();
+
 
 //get all datat to read in, chain together using the next function
 
@@ -48,7 +51,7 @@ router.get('/add', getProfileType, getDetailType, renderFormPage);
 
 function postProfileArr(req,res,next){
   var profileArr = [
-    req.body.user_id,
+    16,
     req.body.profile_type_id,
     req.body.profile_name,
     req.body.user_pseudo
@@ -57,6 +60,8 @@ function postProfileArr(req,res,next){
   profile.create(["user_id","profile_type_id","profile_name","user_pseudo"],
   profileArr, function(response){
     console.log("record inserted at " + response.insertId);
+    req.insertID = response.insertId;
+    console.log(req.insertID)
     res.json();
     next();
   })
@@ -66,48 +71,84 @@ function postDetailArr(req,res){
 
   var detailArr = [
     //text arr
-    [ 1,
+    [ req.insertID,
       1,
       req.body.text,
       null
     ],
     //link1 arr
-    [ 1,
+    [ req.insertID,
       req.body.detail_type_id1,
-      req.body.desc1,
+      null,
       req.body.url1
 
     ],
     //link2 arr
-    [ 1,
+    [ req.insertID,
       req.body.detail_type_id2,
-      req.body.desc2,
+      null,
       req.body.url2
     ],
     //link3 arr
-    [ 1,
+    [ req.insertID,
       req.body.detail_type_id3,
-      req.body.desc3,
+      null,
       req.body.url3
-    ]
+    ],
+    //custom1 arr
+    [ req.insertID,
+      8,
+      req.body.description4,
+      req.body.url4
+    ],
+    //custom2 arr
+    [ req.insertID,
+      8,
+      req.body.description5,
+      req.body.url5
+    ],
 
   ]
 
+  console.log(detailArr)
+
+  console.log(req.insertID)
+
   for(var i = 0; i < detailArr.length; i ++){
+    
     profile_details.create(["profile_id","detail_type_id","description","url"],
     detailArr[i], function(response){
       console.log("record inserted at " + response.insertId);
-      res.json();
+
     });
+
+  
+    //end for loop
   }
+
+  var opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/jpeg',
+    rendererOpts: {
+      quality: 0.3
+    }
+  }
+
+  //replace the 6 with user_id
+  var qrURL = "https://localhost:8080/" + 6 + "/" + req.insertID;
+   
+  var dataURL = QRCode.toDataURL(qrURL, opts, function (err, url) {
+    if (err) throw err
+  
+  });
+
+  res.json(dataURL);
 
 }
 
 //post data to the table
 
 router.post('/api/profile',postProfileArr,postDetailArr);
-
-
 
 
 module.exports = router;
