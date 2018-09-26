@@ -66,8 +66,13 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/login.js");
+var formRoute = require("./controllers/formController.js");
+var qrDisplayRoute = require("./controllers/qrDisplayController.js");
 
- app.use(routes);
+app.use(routes);
+app.use(formRoute);
+app.use(qrDisplayRoute);
+
 
 //passport strategies
 
@@ -100,19 +105,6 @@ function (req, username, password, done) {
   });
 }));
 
-
-// passport.use(new FacebookStrategy({
-//     clientID: FACEBOOK_APP_ID,
-//     clientSecret: FACEBOOK_APP_SECRET,
-//     callbackURL: "http://www.example.com/auth/facebook/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     User.findOrCreate(..., function(err, user) {
-//       if (err) { return done(err); }
-//       done(null, user);
-//     });
-//   }
-// ));
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {

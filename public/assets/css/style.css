@@ -1,0 +1,48 @@
+
+.persona-type{
+	margin: 0 .5em;
+	width: 7em;
+}
+
+.detail-type{
+  margin: .5em 0;
+	width: 10em;
+}
+
+.socialIcons {
+  width: 5em;
+  height: 5em;
+  margin: 0 4em;
+}
+
+#personaName {
+  display: none;
+}
+
+#userPseudo {
+  display: none;
+}
+
+#detailsInput {
+  display: none;
+}
+
+#text_long {
+  display: none;
+}
+
+#sociallinks {
+  display:none;
+}
+
+#customLinks {
+  display: none;
+}
+
+#submitRow {
+  display: none;
+}
+
+#qr{
+  display: none;
+}
