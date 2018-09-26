@@ -1,6 +1,7 @@
 var express = require("express");
 var connection = require("../config/connection.js");
 var expressValidator = require('express-validator');
+var passport = require('passport');
 
 var bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -9,7 +10,33 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.render('home', { title: 'Home' });
+  console.log(req.user);
+  console.log(req.isAuthenticated());
 });
+
+router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+  res.render('profile', { title: 'Profile' });
+});
+
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'Registration' });
+});
+
+router.get('/login_page', function(req, res, next) {
+  res.render('login_page', { title: 'Login' });
+});
+
+router.post('/login_page', passport.authenticate(
+  'local', {
+    successRedirect: '/profile',
+    failureRedirect: '/login_page'
+  }));
+
+router.get('/logout', function(req, res, next) {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+  });
 
 router.post('/register', function(req, res){
   console.log(req.body);
@@ -37,12 +64,23 @@ router.post('/register', function(req, res){
   var email = req.body.email;
   var password = req.body.password;
 
+
   bcrypt.hash(password, saltRounds, function(err, hash) {
   // Store hash in your password DB.
   connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, hash], function(error, results, fields){
       if (error) throw error;
 
-      res.render('register', {title: 'Registration Complete'});
+      connection.query('SELECT LAST_INSERT_ID() as user_id', function(error, results, fields){
+        if (error) throw error;
+
+        const user_id = results[0]
+        console.log(results[0]);
+
+        req.login(user_id,function(err){
+          res.redirect('/');
+        });
+      });
+
     });
 
   });
@@ -50,10 +88,25 @@ router.post('/register', function(req, res){
       }
 });
 
-
-router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Registration' });
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
 });
+
+passport.deserializeUser(function(user_id, done) {
+    console.log("deserializeUser", user_id);
+    done(null, user_id);
+
+});
+
+function authenticationMiddleware() {
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+
+	}
+}
+
 
 
 module.exports = router;
