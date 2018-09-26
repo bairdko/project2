@@ -8,7 +8,7 @@ var detail_type = require("../models/detail_type.js");
 var profile = require("../models/profile.js");
 var profile_details = require("../models/profile_details.js");
 
-var QRCode = require("QRCode");
+var QRCode = require("qrcode");
 
 //set up express router
 var router = express.Router();

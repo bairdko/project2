@@ -32,9 +32,9 @@ app.use(cookieParser());
 
 var options = {
   host: "localhost",
-  port: 3306,
+  port: process.env.JAWSDB_URL || 3306,
   user: "root",
-  password: "jOKER357",
+  password: "",
   database: "persona_db"
 };
 
