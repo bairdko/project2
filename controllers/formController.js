@@ -49,15 +49,14 @@ router.get('/add', getProfileType, getDetailType, renderFormPage);
 //post back to sql tables
 
 function postProfileArr(req,res,next){
-  // console.log("user info:" + req.session.passport.user.user.id);
-  // if (req.user){
-  //   console.log(req.user);
+  // if (req.user.user_id){
+  //   console.log("user info:" + req.user.user_id);
   // }else{
   // console.log("no user");
   // }
 
   var profileArr = [
-    req.user.id,
+    req.user.user_id,
     req.body.profile_type_id,
     req.body.profile_name,
     req.body.user_pseudo
@@ -115,8 +114,6 @@ function postDetailArr(req,res){
 
   ]
 
-  console.log(detailArr)
-
   console.log(req.insertID)
 
 
@@ -141,7 +138,7 @@ function postDetailArr(req,res){
   }
 
   //replace the 6 with user_id
-  var qrURL = "https://persona-01.herokuapp.com/view/" + req.user.id + "/" + req.insertID;
+  var qrURL = "https://persona-01.herokuapp.com/view/" + req.user.user_id + "/" + req.insertID;
 
   QRCode.toDataURL(qrURL, opts, function (err, url) {
     if (err) throw err

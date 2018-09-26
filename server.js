@@ -31,11 +31,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 var options = {
-  host: "localhost",
-  port: process.env.JAWSDB_URL || 3306,
-  user: "root",
-  password: "",
-  database: "persona_db"
+  host: process.env.session_host,
+  port: 3306,
+  user: process.env.session_user,
+  password: process.env.session_pw,
+  database: process.env.session_db
 };
 
 var sessionStore = new MySQLStore(options);
@@ -89,15 +89,15 @@ function (req, username, password, done) {
       if (!user) {
           return done(null, null);
       }
-      console.log(user);
+      // console.log(user);
       let passwordParse = user.password.toString();
       bcrypt.compare(password, passwordParse, function (err, res) {
           if (res) {
-              console.log("Match");
+              // console.log("Match");
               // Passwords match
               return done(null, user);
           } else {
-            console.log("No Match")
+            // console.log("No Match")
               // Passwords don't match
               return done(null, false);
           }

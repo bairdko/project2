@@ -10,8 +10,8 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.render('home', { title: 'Home' });
-  console.log(req.user);
-  console.log(req.isAuthenticated());
+  // console.log(req.user);
+  // console.log(req.isAuthenticated());
 });
 
 router.get('/profile', authenticationMiddleware(), function(req, res, next) {
@@ -39,7 +39,7 @@ router.get('/logout', function(req, res, next) {
   });
 
 router.post('/register', function(req, res){
-  console.log(req.body);
+  // console.log(req.body);
 
 
   req.checkBody('username', 'Username field cannot be empty.').notEmpty();
@@ -53,7 +53,7 @@ router.post('/register', function(req, res){
   const errors = req.validationErrors();
 
   if (errors){
-    console.log(`errors: ${JSON.stringify(errors)}`);
+    // console.log(`errors: ${JSON.stringify(errors)}`);
     res.render('register', {
         title: 'Registration Error',
         errors: errors
@@ -74,7 +74,7 @@ router.post('/register', function(req, res){
         if (error) throw error;
 
         const user_id = results[0]
-        console.log(results[0]);
+        // console.log(results[0]);
 
         req.login(user_id,function(err){
           res.redirect('/');
@@ -93,14 +93,14 @@ passport.serializeUser(function(user_id, done) {
 });
 
 passport.deserializeUser(function(user_id, done) {
-    console.log("deserializeUser", user_id);
+    // console.log("deserializeUser", user_id);
     done(null, user_id);
 
 });
 
 function authenticationMiddleware() {
 	return (req, res, next) => {
-		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+		// console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
 	    if (req.isAuthenticated()) return next();
 
