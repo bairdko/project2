@@ -1,0 +1,276 @@
+
+<div class = "container">
+  <div class = "row">
+    <br />
+  <!--filler row-->
+  </div>
+
+  <div id = "personaType">
+
+    <div class = "row" id="personaTypeQ">
+      <h4>What kind of Persona do you want to create?</h4>
+    <!--end header row-->
+    </div>
+    
+    <div class = "row">
+      <br />
+    <!--filler row-->
+    </div>
+    
+    
+    <!-- select type-->
+    
+    <div class = "row text-right justify-content-end" id = "personaTypeA">
+
+      {{#each profile_types}}
+      <button  type = "button" class = "btn btn-outline-secondary persona-type" value = "{{id}}">
+          <div class = "row justify-content-center"><i class = "fas {{profile_icon}}"></i></div>
+          <div class = "row justify-content-center">{{profile_type}}</div>
+      </button>
+      {{/each}}
+      
+    </div>
+    
+  </div>
+
+  <div id = "personaName">
+
+    <div class = "row">
+      <br />
+    <!--filler row-->
+    </div>
+
+    <!-- this is the input to get the profile nickname -->
+
+    <div class = "row" id = "personaNameQ">
+      <h4>What would you like to call this Persona?</h4>
+    </div>
+    
+    <div class = "row justify-content-end" id = "personaNameA">
+      <div class="form-group col-md-5">
+        <input type="text" class="form-control" id = "profile_name" placeholder="Enter a Persona name">
+      </div>
+    </div>
+
+  </div>
+
+
+    
+    <!-- this is the input to get the user nickname -->
+
+    
+  <div id = "userPseudo">
+
+    <div class = "row">
+      <br />
+    <!--filler row-->
+    </div>
+
+    <!-- this is the input to get the profile nickname -->
+
+    <div class = "row" id = "userPseudoQ">
+      <h4>How would you like your name displayed?</h4>
+    </div>
+    
+    <div class = "row justify-content-end" id = "userPseudoA">
+      <div class="form-group col-md-5">
+        <input type="text" class="form-control" id = "user_pseudo" placeholder="Enter your name">
+      </div>
+    </div>
+
+  </div>
+
+  <!--turn this into a block expression-->
+  <div id = "detailsInput">
+    <div class = "row">
+      <br />
+    <!--filler row-->
+    </div>
+
+    <div class = "row" id = "detailsInputQ">
+      <h4>What do you want to add to your Persona?</h4>
+    </div>
+    
+    <div class = "row">
+      <br />
+    <!--filler row-->
+    </div>
+
+
+    <div class = "row">
+
+      <div class = "col-md-3 justify-content-around" id = "detailsInputA">
+        <div class = "row">
+          <button  type = "button" class = "btn btn-outline-secondary detail-type" id = "textInput">
+              <div class = "row justify-content-center"><i class = "fas fa-edit"></i></div>
+              <div class = "row justify-content-center">Custom Bio</div>
+          </button>
+        </div>
+        
+        <div class = "row">
+          <button  type = "button" class = "btn btn-outline-secondary detail-type" id = "social">
+            <div class = "row justify-content-center"><i class = "fas fa-bullhorn"></i></div>
+            <div class = "row justify-content-center">Social Media</div>
+          </button>
+        </div>
+        
+        <div class = "row">
+          <button  type = "button" class = "btn btn-outline-secondary detail-type" id = "custom">
+            <div class = "row justify-content-center"><i class = "fas fa-laptop"></i></div>
+            <div class = "row justify-content-center">Email or Other Link</div>
+          </button>
+        </div>
+      </div>
+    
+    
+    
+  
+
+  <div class = "col-md-9">
+
+    <div class = "form-group col-md-12">
+        <textarea class="form-control text_input" id="text_long" rows="4" 
+          placeholder = "What do you want us to know about your Persona? Enter a short bio (250 charcters or less)"></textarea>
+    </div>
+
+ 
+
+    <div id = "sociallinks">
+
+
+
+      {{!-- link 1 --}}
+        <div class = "form-row">
+
+          <div class = "form-group col-md-3">
+            
+            <select id="detail_type1" class="form-control">
+              <option value = '-1' selected>Choose an option</option>
+              {{#each detail_types}}
+                {{#unless @first}}{{#unless @last}}
+                <option value = "{{id}}">{{ detail_type}}</option>
+                {{/unless}}{{/unless}}
+                {{/each}}
+            </select>
+            
+          </div>
+
+          <div class = "form-group col-md-9">
+            <input type = "text" class = "form-control link1" id = "link1_url" placeholder = "Enter URL">
+          </div>
+      </div>
+
+    
+    
+    {{!-- link 2--}}
+
+    <div class = "form-row">
+
+      <div class = "form-group col-md-3">
+        
+        <select id="detail_type2" class="form-control">
+          <option value = '-1' selected>Choose an option</option>
+          {{#each detail_types}}
+            {{#unless @first}}
+            <option value = "{{id}}">{{detail_type}}</option>
+            {{/unless}}
+            {{/each}}
+        </select>
+        
+      </div>
+
+      <div class = "form-group col-md-9">
+        <input type = "text" class = "form-control link2" id = "link2_url" placeholder = "Enter URL">
+      </div>
+    </div>
+
+    {{!-- link 3--}}
+
+    <div class = "form-row">
+
+      <div class = "form-group col-md-3">
+        
+        <select id="detail_type3" class="form-control">
+          <option value = '-1' selected>Choose an option</option>
+          {{#each detail_types}}
+            {{#unless @first}}
+            <option value = "{{id}}">{{detail_type}}</option>
+            {{/unless}}
+            {{/each}}
+        </select>
+        
+      </div>
+
+      <div class = "form-group col-md-9">
+        <input type = "text" class = "form-control link3" id = "link1_url" placeholder = "Enter URL">
+      </div>
+    
+    </div>
+
+  </div>
+
+    <div id = "customLinks">
+    
+      <div class = "form-row">
+
+          <div class = "form-group col-md-6">
+            <input type = "text" class = "form-control" id = "custom1_desc" placeholder = "Description">
+          </div>
+          <div class = "form-group col-md-6">
+            <input type = "text" class = "form-control" id = "custom1_url" placeholder = "Enter URL">
+          </div>
+
+      </div>
+
+
+      <div class = "form-row">
+
+          <div class = "form-group col-md-6">
+            <input type = "text" class = "form-control" id = "custom2_desc" placeholder = "Description">
+          </div>
+          <div class = "form-group col-md-6">
+            <input type = "text" class = "form-control" id = "custom2_url" placeholder = "Enter URL">
+          </div>
+
+      </div>
+
+    </div>
+
+    {{!--end right column--}}
+    </div>  
+
+  </div>
+
+  </div>
+
+  <div id = "submitRow">
+
+    <div col = "col-md-4">
+      <div class = "row">
+        <br />
+      <!--filler row-->
+      </div>
+
+      <button type="submit" class="btn btn-primary" id = "submit">Render QR!</button> 
+
+      <div class = "row">
+          <br />
+      <!--filler row-->
+      </div>
+    </div>
+
+    <div col = "col-md-8">
+      {{!-- qr image holder --}}
+      <img id = "qr"/>
+    </div>
+
+  </div>
+
+  
+
+<!--end container-->
+</div>
+
+
+
+ 
