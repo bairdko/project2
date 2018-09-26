@@ -14,7 +14,7 @@ var buttonFormResponse = function(formId,displayId){
   $(document).on('click', formId, function(){
     displayOnEvent(displayId);
 
-    $(formId).prop('disabled');    
+    $(formId).prop('disabled');
 
   });
 };
@@ -23,7 +23,7 @@ var detailFormResponse = function(formId,displayId){
   $(document).on('click', formId, function(){
     displayOnEvent(displayId);
 
-    $(formId).prop('disabled');    
+    $(formId).prop('disabled');
 
 
     $('#submitRow').css('display', 'block');
@@ -91,7 +91,7 @@ $(document).on("click","#submit",function(){
   }).then(
     function(res){
       console.log("posted");
-      dataURL = window.location.origin + res;
+      dataURL = res;
 
       $('#qr').css('display','block');
       $('#qr').attr('src',dataURL);

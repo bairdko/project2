@@ -5,16 +5,9 @@
 
 /*profile seeds - TEST DATA ONLY*/
 
-INSERT INTO profile (user_id, profile_type_id, profile_name, user_pseudo)
-VALUES ( 1, 2, "Test", "Test");
-
-/*profile details seeds - TEST DATA ONLY*/
-/* I accidentally deleted this*/
-
-/*profile type seeds - NECESSARY FOR FUNCTIONALITY*/
 
 INSERT INTO profile_type (profile_type,profile_icon)
-VALUES 
+VALUES
 ("personal","fa-user"),
 ("professional","fa-briefcase"),
 ("dating","fa-heart"),

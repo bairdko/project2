@@ -1,5 +1,5 @@
 
-//require npms 
+//require npms
 var express = require("express");
 
 //require models
@@ -18,7 +18,7 @@ var router = express.Router();
 
 function getProfileType(req, res, next) {
   profile_type.all(function(data) {
-  
+
     req.profile_type = data;
     next();
   });
@@ -49,8 +49,15 @@ router.get('/add', getProfileType, getDetailType, renderFormPage);
 //post back to sql tables
 
 function postProfileArr(req,res,next){
+  // console.log("user info:" + req.session.passport.user.user.id);
+  // if (req.user){
+  //   console.log(req.user);
+  // }else{
+  // console.log("no user");
+  // }
+
   var profileArr = [
-    16,
+    req.user.id,
     req.body.profile_type_id,
     req.body.profile_name,
     req.body.user_pseudo
@@ -112,15 +119,16 @@ function postDetailArr(req,res){
 
   console.log(req.insertID)
 
+
   for(var i = 0; i < detailArr.length; i ++){
-    
+
     profile_details.create(["profile_id","detail_type_id","description","url"],
     detailArr[i], function(response){
       console.log("record inserted at " + response.insertId);
 
     });
 
-  
+
     //end for loop
   }
 
@@ -133,11 +141,11 @@ function postDetailArr(req,res){
   }
 
   //replace the 6 with user_id
-  var qrURL = "/view/" + 6 + "/" + req.insertID;
-   
+  var qrURL = "https://persona-01.herokuapp.com/view/" + req.user.id + "/" + req.insertID;
+
   QRCode.toDataURL(qrURL, opts, function (err, url) {
     if (err) throw err
-  
+
     console.log(url);
     res.send(url);
 
@@ -145,7 +153,7 @@ function postDetailArr(req,res){
 
 }
 
-//post data to the table  
+//post data to the table
 
 router.post('/api/profile',postProfileArr,postDetailArr);
 
