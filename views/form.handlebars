@@ -129,7 +129,8 @@
   <div class = "col-md-9">
 
     <div class = "form-group col-md-12">
-        <textarea class="form-control text_input" id="text_long" rows="4" placeholder = "What do you want us to know about your Persona?"></textarea>
+        <textarea class="form-control text_input" id="text_long" rows="4" 
+          placeholder = "What do you want us to know about your Persona? Enter a short bio (250 charcters or less)"></textarea>
     </div>
 
  
@@ -144,7 +145,7 @@
           <div class = "form-group col-md-3">
             
             <select id="detail_type1" class="form-control">
-              <option value = '' selected>Choose an option</option>
+              <option value = '-1' selected>Choose an option</option>
               {{#each detail_types}}
                 {{#unless @first}}{{#unless @last}}
                 <option value = "{{id}}">{{ detail_type}}</option>
@@ -168,7 +169,7 @@
       <div class = "form-group col-md-3">
         
         <select id="detail_type2" class="form-control">
-          <option value = '' selected>Choose an option</option>
+          <option value = '-1' selected>Choose an option</option>
           {{#each detail_types}}
             {{#unless @first}}
             <option value = "{{id}}">{{detail_type}}</option>
@@ -190,7 +191,7 @@
       <div class = "form-group col-md-3">
         
         <select id="detail_type3" class="form-control">
-          <option value = '' selected>Choose an option</option>
+          <option value = '-1' selected>Choose an option</option>
           {{#each detail_types}}
             {{#unless @first}}
             <option value = "{{id}}">{{detail_type}}</option>

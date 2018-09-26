@@ -3,7 +3,6 @@
 var express = require("express");
 
 //require models
-var user = require("../models/users.js");
 var profile_type = require("../models/profile_type.js");
 var detail_type = require("../models/detail_type.js");
 var profile = require("../models/profile.js");
@@ -62,7 +61,6 @@ function postProfileArr(req,res,next){
     console.log("record inserted at " + response.insertId);
     req.insertID = response.insertId;
     console.log(req.insertID)
-    res.json();
     next();
   })
 }
@@ -135,18 +133,19 @@ function postDetailArr(req,res){
   }
 
   //replace the 6 with user_id
-  var qrURL = "https://localhost:8080/" + 6 + "/" + req.insertID;
+  var qrURL = "/view/" + 6 + "/" + req.insertID;
    
-  var dataURL = QRCode.toDataURL(qrURL, opts, function (err, url) {
+  QRCode.toDataURL(qrURL, opts, function (err, url) {
     if (err) throw err
   
-  });
+    console.log(url);
+    res.send(url);
 
-  res.json(dataURL);
+  });
 
 }
 
-//post data to the table
+//post data to the table  
 
 router.post('/api/profile',postProfileArr,postDetailArr);
 

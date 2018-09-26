@@ -2,9 +2,6 @@
 var express = require("express");
 
 //require models
-var user = require("../models/users.js");
-var profile_type = require("../models/profile_type.js");
-var detail_type = require("../models/detail_type.js");
 var profile = require("../models/profile.js");
 var profile_details = require("../models/profile_details.js");
 

@@ -48,55 +48,55 @@ detailFormResponse('#custom','#customLinks');
 $(document).on("click","#submit",function(){
   event.preventDefault();
 
+  var tempArr = [ $(".persona-type").val(), $("#profile_name").val(),
+    $("#user_pseudo").val(), $("#text_long").val(), $("#detail_type1").val(),
+    $("#link1_url").val(),$("#detail_type2").val(), $("#link2_url").val(),
+    $("#detail_type3").val(), $("#link3_url").val(),$("#custom1_desc").val(),
+    $("#custom1_url").val(),$("#custom2_desc").val(),$("#custom2_url").val()
+  ];
+
+  for(var i = 0; i < tempArr.length; i++){
+    if(!tempArr[i]){
+      tempArr[i] = null;
+    }
+    else{
+      tempArr[i].trim();
+    }
+  }
+
   var newProfile = {
-
-    profile_type_id: parseInt($(".persona-type").val()),
-    profile_name: $("#profile_name").val(),
-    user_pseudo: $("#user_pseudo").val(),
-    text: $("#text_long").val(),
-    detail_type_id1: $("#detail_type1").val(),
-    url1: $("#link1_url").val(),
-    detail_type_id2: $("#detail_type2").val(),
-    url2: $("#link2_url").val(),
-    detail_type_id3: $("#detail_type3").val(),
-    url3: $("#link3_url").val(),
-    description4: $("#custom1_desc").val(),
-    url4: $("#custom1_url").val(),
-    description5: $("#custom2_desc").val(),
-    url5: $("#custom2_url").val()
-  };
-
-  //trimming data if exists
-  for (element in newProfile){
-
-    // if(element === '' || element == undefined){
-    //   newProfile[element] = null;
-    // }
-
-    // if(element !== undefined){
-    //   newProfile[element].trim();
-    // }
-
-    
+    profile_type_id: parseInt(tempArr[0]),
+    profile_name: tempArr[1],
+    user_pseudo: tempArr[2],
+    text: tempArr[3],
+    detail_type_id1: tempArr[4],
+    url1: tempArr[5],
+    detail_type_id2: tempArr[6],
+    url2: tempArr[7],
+    detail_type_id3: tempArr[8],
+    url3: tempArr[9],
+    description4: tempArr[10],
+    url4: tempArr[11],
+    description5: tempArr[12],
+    url5: tempArr[13]
   };
 
 
   //var dataURL;
 
 
-  $.ajax("/api/profile",{
+  $.ajax({url:window.location.origin + "/api/profile",
     type: "POST",
     data: newProfile
   }).then(
     function(res){
       console.log("posted");
-      
-      // dataURL = res.dataURL;
-      // console.log(dataURL);
+      dataURL = window.location.origin + res;
+
+      $('#qr').css('display','block');
+      $('#qr').attr('src',dataURL);
   });
 
-  // $('#qr').css('display','block');
-  // $('#qr').attr('src','dataURL');
 
 //end onclick
 });
