@@ -1,9 +1,8 @@
-
 //require the npm package
 var mysql = require("mysql");
 var connection;
 
-//set up my connection 
+//set up my connection
 if(process.env.JAWSDB_URL){
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
