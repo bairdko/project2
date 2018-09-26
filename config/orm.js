@@ -5,6 +5,17 @@ var connection = require("./connection.js");
 //create
 //update queries
 
+//helper function to make query string
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
 
 //orm is variable is an object of different queryies to the database where you can DRY up code for common db queries.
 //here we would make queries where we get info from db. make post to db. delete from db etc. using sql syntax.
@@ -36,7 +47,7 @@ var orm = {
         console.log(result);
       }
     );
-  }
+  },
 
   all: function(tableInput,cb){
     var queryString = "SELECT * FROM ??;"
@@ -111,3 +122,5 @@ var orm = {
 
 
 };
+
+module.exports = orm;
