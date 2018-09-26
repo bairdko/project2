@@ -36,7 +36,7 @@ var orm = {
         console.log(result);
       }
     );
-  }
+  },
 
   all: function(tableInput,cb){
     var queryString = "SELECT * FROM ??;"
@@ -111,3 +111,18 @@ var orm = {
 
 
 };
+
+//helper function to make query string
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
+
+
+module.exports = orm;
